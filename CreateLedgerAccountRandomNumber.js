@@ -1,63 +1,75 @@
 function CreateLedgerAccountRandomNumber(sequence) {
-  
-if (sequence <= 0) throw new Error('ArgumentOutOfRangeException: sequence');
 
-  const SEED = 1;
-  const MAX_ACCOUNT_NUMBER_LENGTH = 12;
-  const MAX_SEQUENCE_LENGTH = 5;
+    if (sequence <= 0) throw new Error('ArgumentOutOfRangeException: sequence');
 
-  let offset = SEED + sequence;
-  let result = RandomSequenceOfUnique(SEED, offset);
-  let index = result[0];
-  let intermediateOffset = result[1];
-  let number = Next(index, intermediateOffset).toString();
-  let lengthMaxCountAccount = sequence.toString().length;
+    const SEED = 1;
+    const MAX_ACCOUNT_NUMBER_LENGTH = 12;
+    const MAX_SEQUENCE_LENGTH = 5;
 
-  if (lengthMaxCountAccount > MAX_SEQUENCE_LENGTH)
-      number = sequence.toString()[0] + number;
+    let offset = SEED + sequence;
+    let result = RandomSequenceOfUnique(SEED, offset);
+    let index = result[0];
+    let intermediateOffset = result[1];
+    let number = Next(index, intermediateOffset).toString();
+    let lengthMaxCountAccount = sequence.toString().length;
 
-  let Number = number + VerifiedDigit(number);
+    if (lengthMaxCountAccount > MAX_SEQUENCE_LENGTH)
+        number = sequence.toString()[0] + number;
 
-  if (Number.length > MAX_ACCOUNT_NUMBER_LENGTH) {
-      throw new Error('Número gerado é maior que 12 caracteres');
-  }
+    let Number = number + VerifiedDigit(number);
 
-  return Number.padStart(MAX_ACCOUNT_NUMBER_LENGTH, '0');
+    if (Number.length > MAX_ACCOUNT_NUMBER_LENGTH) {
+        throw new Error('Número gerado é maior que 12 caracteres');
+    }
+
+    return Number.padStart(MAX_ACCOUNT_NUMBER_LENGTH, '0');
 }
 
 function Next(index, intermediateOffset) {
-  const EXPONENT = 27  
-  return PermuteQPR((PermuteQPR(index) + intermediateOffset) ^ EXPONENT);
+    if (index < 0) throw new Error('ArgumentOutOfRangeException: index');
+    if (intermediateOffset < 0) throw new Error('ArgumentOutOfRangeException: intermediateOffset');
+
+    const STEP_SIZE_OFFSET = 27
+    return PermuteQPR((PermuteQPR(index) + intermediateOffset) ^ STEP_SIZE_OFFSET);
 }
 
 function RandomSequenceOfUnique(seed, offset) {
-  let index = PermuteQPR(PermuteQPR(seed) + 3);
-  let intermediateOffset = PermuteQPR(PermuteQPR(offset) + 7);
+    if (seed < 0) throw new Error('ArgumentOutOfRangeException: seed');
+    if (offset < 0) throw new Error('ArgumentOutOfRangeException: offset');
 
-  return [index, intermediateOffset];
+    let index = PermuteQPR(PermuteQPR(seed) + 3);
+    let intermediateOffset = PermuteQPR(PermuteQPR(offset) + 7);
+
+    return [index, intermediateOffset];
 }
 
 function PermuteQPR(value) {
-  const PRIME = 127;
-  const DIVISOR = 2;
-  if (value >= PRIME) return value;
 
-  let residue = (value * value) % PRIME;
-  return value <= PRIME / DIVISOR ? residue : PRIME - residue;
+    if (value < 0) throw new Error('ArgumentOutOfRangeException: value');
+
+    const PERMUTATION_PRIME = 127;
+    const RESIDUE_THRESHOLD = 2;
+    if (value >= PRIME) return value;
+
+    let residue = (value * value) % PERMUTATION_PRIME;
+    return value <= PERMUTATION_PRIME / RESIDUE_THRESHOLD ? residue : PERMUTATION_PRIME - residue;
 }
 
 function VerifiedDigit(accountNumber) {
-  const WEIGHT = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  let sum = 0;
-  let idx = 0;
+    const WEIGHT = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9];
+    const MOD_DIVISOR = 11;
+    const CHECK_DIGIT_FACTOR = 10
 
-  for (let intPos = accountNumber.length - 1; intPos >= 0; intPos--) {
-      sum += parseInt(accountNumber[intPos]) * WEIGHT[idx];
-      idx++;
-  }
+    let sum = 0;
+    let idx = 0;
 
-  let mod = (sum * 10) % 11;
-  if (mod >= 10) mod = 0;
-  return mod;
+    for (let intPos = accountNumber.length - 1; intPos >= 0; intPos--) {
+        sum += parseInt(accountNumber[intPos]) * WEIGHT[idx];
+        idx++;
+    }
+
+    let mod = (sum * CHECK_DIGIT_FACTOR) % MOD_DIVISOR;
+    if (mod >= CHECK_DIGIT_FACTOR) mod = 0;
+    return mod;
 }
