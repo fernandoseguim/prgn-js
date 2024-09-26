@@ -49,7 +49,7 @@ function PermuteQPR(value) {
 
     const PERMUTATION_PRIME = 127;
     const RESIDUE_THRESHOLD = 2;
-    if (value >= PRIME) return value;
+    if (value >= PERMUTATION_PRIME) return value;
 
     let residue = (value * value) % PERMUTATION_PRIME;
     return value <= PERMUTATION_PRIME / RESIDUE_THRESHOLD ? residue : PERMUTATION_PRIME - residue;
@@ -62,11 +62,11 @@ function VerifiedDigit(accountNumber) {
     const CHECK_DIGIT_FACTOR = 10
 
     let sum = 0;
-    let idx = 0;
+    let index = 0;
 
-    for (let intPos = accountNumber.length - 1; intPos >= 0; intPos--) {
-        sum += parseInt(accountNumber[intPos]) * WEIGHT[idx];
-        idx++;
+    for (let position = accountNumber.length - 1; position >= 0; position--) {
+        sum += parseInt(accountNumber[position]) * WEIGHT[index];
+        index++;
     }
 
     let mod = (sum * CHECK_DIGIT_FACTOR) % MOD_DIVISOR;
