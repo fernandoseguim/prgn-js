@@ -28,8 +28,3 @@ export default function createLedgerAccountRandomNumber(sequence: number): strin
 
     return accountNumber.padStart(MAX_ACCOUNT_NUMBER_LENGTH, '0');
 }
-
-1_000_000_000_000
-0_
-
-99_999_999_999
