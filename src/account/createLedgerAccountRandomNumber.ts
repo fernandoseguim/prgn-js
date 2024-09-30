@@ -6,7 +6,7 @@ export default function createLedgerAccountRandomNumber(sequence: number): strin
 
     if (sequence <= 0) throw new Error('ArgumentOutOfRangeException: sequence');
 
-    const SEED = 1;
+    const SEED = 1000;
     const MAX_ACCOUNT_NUMBER_LENGTH = 12;
     const MAX_SEQUENCE_LENGTH = 5;
 
