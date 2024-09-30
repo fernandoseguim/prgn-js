@@ -1,8 +1,6 @@
 export default function permuteQPR(value: number): number {
 
-    if (value < 0) throw new Error('ArgumentOutOfRangeException: value');
-
-    const PERMUTATION_PRIME = 4294967291;
+    const PERMUTATION_PRIME = 127;
 
     if (value >= PERMUTATION_PRIME) return value;
 
