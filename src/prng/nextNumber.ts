@@ -4,6 +4,6 @@ export default function nextNumber(index: number, intermediateOffset: number): n
     if (index < 0) throw new Error('ArgumentOutOfRangeException: index');
     if (intermediateOffset < 0) throw new Error('ArgumentOutOfRangeException: intermediateOffset');
 
-    const STEP_SIZE_OFFSET = 27
+    const STEP_SIZE_OFFSET = 1548584693
     return permuteQPR((permuteQPR(index) + intermediateOffset) ^ STEP_SIZE_OFFSET);
 }

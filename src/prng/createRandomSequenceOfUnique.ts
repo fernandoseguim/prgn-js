@@ -4,8 +4,8 @@ export default function createRandomSequenceOfUnique(seed: number, offset: numbe
     if (seed < 0) throw new Error('ArgumentOutOfRangeException: seed');
     if (offset < 0) throw new Error('ArgumentOutOfRangeException: offset');
 
-    let index = permuteQPR(permuteQPR(seed) + 3);
-    let intermediateOffset = permuteQPR(permuteQPR(offset) + 7);
+    let index = permuteQPR(permuteQPR(seed) + 1741231585);
+    let intermediateOffset = permuteQPR(permuteQPR(offset) + 1181783493);
 
     return [index, intermediateOffset];
 }
