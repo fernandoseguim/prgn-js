@@ -30,12 +30,12 @@ function createRandomSequenceOfUnique(min: number, max: number): number[]
 
 **Exemplo de Input**:
 ```js
-createRandomSequenceOfUnique(10, 100)
+createRandomSequenceOfUnique(1000, 1001)
 ```
 
 **Exemplo de Output**:
 ```js
-[35, 89, 12, 76, 45, 23, 91, 50, 33, 28]
+[1003,1008]
 ```
 
 ---
@@ -77,7 +77,7 @@ createLedgerAccountRandomNumber()
 
 **Exemplo de Output**:
 ```js
-000000000558
+000000019844
 ```
 
 ---
@@ -93,10 +93,11 @@ function createDigitVerify(number: number): number
 
 **Exemplo de Input**:
 ```js
-createDigitVerify(12345678)
+createDigitVerify('1984')
 ```
 
 **Exemplo de Output**:
 ```js
-3
+4
 ```
+

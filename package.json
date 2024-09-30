@@ -1,0 +1,18 @@
+{
+  "name": "prng",
+  "version": "1.0.0",
+  "description": "Cria numeros de contas a partir de algoritmo PRNG, aplicando o método de permutação \"Quadratic Prime Residue\" (QPR) para misturar bits de um número e gerar uma permutação pseudo-aleatória.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",                
+    "start": "node dist/index.js",  
+    "dev": "ts-node src/index.ts" 
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}
