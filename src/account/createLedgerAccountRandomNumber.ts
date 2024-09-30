@@ -22,7 +22,7 @@ export function createRandomNumber(sequence: number): string {
 
     if (sequence <= 0) throw new Error('ArgumentOutOfRangeException: sequence');
 
-    const SEED = 1000;
+    const SEED = 1;
     const MAX_RANDOM_NUMBER_LENGTH = 11;
     const MAX_SEQUENCE_LENGTH = 5;
 
