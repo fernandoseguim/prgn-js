@@ -1,6 +1,6 @@
 export default function permuteQPR(value: number): number {
 
-    const PERMUTATION_PRIME = 127;
+    const PERMUTATION_PRIME = 2039;
 
     if (value >= PERMUTATION_PRIME) return value;
 
