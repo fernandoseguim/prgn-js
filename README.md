@@ -1,3 +1,23 @@
+Instalar dependencias
+
+```npm
+npm i --save-dev
+```
+
+Para compilar em executar
+
+```npm
+npm run build && npm run start -- [total_accounts]
+```
+
+Para executar em modo desenvolvimento
+
+```npm
+npm run dev -- [total_accounts]
+```
+
+---
+
 ### 1. `permuteQPR.ts`
 
 **Função**: `permuteQPR`  
